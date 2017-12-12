@@ -1,0 +1,6 @@
+[package]
+name = "rsmc"
+version = "0.1.0"
+authors = ["Yuki Nagae <yuki.nagae1130@gmail.com>"]
+
+[dependencies]
