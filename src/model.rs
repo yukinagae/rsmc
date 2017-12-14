@@ -4,7 +4,7 @@ use distributions::distribution::Distribution;
 ///
 ///
 pub struct Model<'a> {
-    dists: Vec<&'a Distribution>,
+    pub dists: Vec<&'a Distribution>,
 }
 
 ///
