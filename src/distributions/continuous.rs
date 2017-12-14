@@ -1,7 +1,4 @@
 extern crate probability;
-extern crate rand;
-
-//use self::rand::Rng;
 
 use self::probability::source;
 use self::probability::distribution::Sample;
@@ -39,6 +36,8 @@ impl Uniform {
 }
 
 impl Distribution for Uniform {
+    type Value = f64;
+
     fn random(&self) -> f64 {
         let mut source = source::default();
         self.dist.sample(&mut source)
