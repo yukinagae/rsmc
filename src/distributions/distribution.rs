@@ -2,14 +2,12 @@
 ///
 ///
 pub trait Distribution {
-    type Value;
-
-    fn random(&self) -> Self::Value;
+    fn random(&self) -> f64;
     fn logp(&self) -> f64;
 }
 
 pub trait Discrete: Distribution {
-    fn mass(&self, x: Self::Value) -> f64;
+    fn mass(&self, x: f64) -> f64;
 }
 
 pub trait Continuous: Distribution {

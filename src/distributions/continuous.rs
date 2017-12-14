@@ -36,8 +36,6 @@ impl Uniform {
 }
 
 impl Distribution for Uniform {
-    type Value = f64;
-
     fn random(&self) -> f64 {
         let mut source = source::default();
         self.dist.sample(&mut source)

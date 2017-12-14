@@ -31,11 +31,9 @@ impl Bernoulli {
 }
 
 impl Distribution for Bernoulli {
-    type Value = u8;
-
-    fn random(&self) -> u8 {
+    fn random(&self) -> f64 {
         let mut source = source::default();
-        self.dist.sample(&mut source)
+        self.dist.sample(&mut source) as f64
     }
 
     fn logp(&self) -> f64 {
@@ -44,7 +42,7 @@ impl Distribution for Bernoulli {
 }
 
 impl Discrete for Bernoulli {
-    fn mass(&self, x: u8) -> f64 {
-        self.dist.mass(x)
+    fn mass(&self, x: f64) -> f64 {
+        self.dist.mass(x as u8) as f64
     }
 }
