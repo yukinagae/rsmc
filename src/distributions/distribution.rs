@@ -13,5 +13,5 @@ pub trait Discrete: Distribution {
 }
 
 pub trait Continuous: Distribution {
-    fn density(&self) -> f64;
+    fn density(&self, x: f64) -> f64;
 }

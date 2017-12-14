@@ -1,13 +1,13 @@
 extern crate probability;
 extern crate rand;
 
-
 //use self::rand::Rng;
 
 use self::probability::source;
-use self::probability::sampler::Independent;
+use self::probability::distribution::Sample;
 use self::probability::distribution::Mean;
 use self::probability::distribution::Median;
+use self::probability::distribution::Continuous as _Continuous;
 
 use distributions::distribution::Distribution;
 use distributions::distribution::Continuous;
@@ -41,10 +41,7 @@ impl Uniform {
 impl Distribution for Uniform {
     fn random(&self) -> f64 {
         let mut source = source::default();
-        // rand::thread_rng().gen_range(self.lower, self.upper)
-        let sampler = Independent(&self.dist, &mut source);
-        let samples = sampler.take(1).collect::<Vec<_>>();
-        samples[0]
+        self.dist.sample(&mut source)
     }
 
     fn logp(&self) -> f64 {
@@ -53,7 +50,7 @@ impl Distribution for Uniform {
 }
 
 impl Continuous for Uniform {
-    fn density(&self) -> f64 {
-        1.0 // TODO: not yet
+    fn density(&self, x: f64) -> f64 {
+        self.dist.density(x)
     }
 }
