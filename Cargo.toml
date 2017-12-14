@@ -5,3 +5,4 @@ authors = ["Yuki Nagae <yuki.nagae1130@gmail.com>"]
 
 [dependencies]
 rand = "0.3"
+probability = "0.15.9"

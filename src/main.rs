@@ -1,17 +1,16 @@
 // TOOD: hoge
 extern crate rsmc;
+extern crate probability;
 
-use rsmc::distributions::Uniform;
-use rsmc::distributions::Distribution;
+use rsmc::distributions::continuous::Uniform;
+use rsmc::distributions::distribution::Distribution;
 
 fn main() {
-    let uniform = Uniform {
-        lower: 1.0,
-        upper: 2.0,
-        mean: 3.0,
-        median: 4.0,
-    };
 
-    println!("{:?}", uniform);
+    let uniform = Uniform::new(1.0, 3.0);
+
+    println!("lower: {:}, upper: {:}", uniform.lower, uniform.upper);
+    println!("mean: {:}, median: {:}", uniform.mean, uniform.median);
+    println!("logp: {:}", uniform.logp());
     println!("{:?}", uniform.random());
 }
