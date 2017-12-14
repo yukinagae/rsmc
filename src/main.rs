@@ -5,7 +5,7 @@ extern crate rsmc;
 use rsmc::distributions::continuous::Uniform;
 use rsmc::distributions::discrete::Bernoulli;
 use rsmc::distributions::distribution::Distribution;
-//use rsmc::model::Model;
+use rsmc::model::Model;
 
 fn main() {
     let uniform = Uniform::new(1.0, 3.0);
@@ -22,4 +22,7 @@ fn main() {
     println!("logp: {:}", bernoulli.logp());
     println!("{:?}", bernoulli.random());
 
-    let model = Model::new();
+    let mut model = Model::new();
+    model.add_dist(&uniform);
+    model.add_dist(&bernoulli);
+}

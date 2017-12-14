@@ -1,25 +1,21 @@
 use distributions::distribution::Distribution;
 
-use std::cell::RefCell;
-
 ///
 ///
 ///
-pub struct Model {
-    dists: RefCell<Vec<Distribution>>,
+pub struct Model<'a> {
+    dists: Vec<&'a Distribution>,
 }
 
 ///
 ///
 ///
-impl Model {
-    fn new() -> Self {
-        Model {
-            dists: RefCell::new(Vec::new()),
-        }
+impl<'a> Model<'a> {
+    pub fn new() -> Self {
+        Model { dists: Vec::new() }
     }
 
-    fn add_dist(&self, dist: Distribution) {
-        self.dists.borrow_mut().push(dist);
+    pub fn add_dist(&mut self, dist: &'a Distribution) {
+        self.dists.push(dist);
     }
 }
