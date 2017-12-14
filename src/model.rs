@@ -1,4 +1,4 @@
-use distributions::distribution::Distribution;
+use distribution::Distribution;
 
 ///
 ///

@@ -5,8 +5,8 @@ use self::probability::distribution::Sample;
 use self::probability::distribution::Modes;
 use self::probability::distribution::Discrete as _Discrete;
 
-use distributions::distribution::Distribution;
-use distributions::distribution::Discrete;
+use distribution::Distribution;
+use distribution::Discrete;
 
 ///
 /// Bernoulli distribution

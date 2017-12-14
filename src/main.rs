@@ -1,8 +1,8 @@
 extern crate probability;
 extern crate rsmc;
 
-use rsmc::distributions::continuous::Uniform;
-use rsmc::distributions::discrete::Bernoulli;
+use rsmc::distribution::uniform::Uniform;
+use rsmc::distribution::bernoulli::Bernoulli;
 use rsmc::model::Model;
 
 fn main() {

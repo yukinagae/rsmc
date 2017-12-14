@@ -6,8 +6,8 @@ use self::probability::distribution::Mean;
 use self::probability::distribution::Median;
 use self::probability::distribution::Continuous as _Continuous;
 
-use distributions::distribution::Distribution;
-use distributions::distribution::Continuous;
+use distribution::Distribution;
+use distribution::Continuous;
 
 ///
 /// Uniform distribution
