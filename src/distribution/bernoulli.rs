@@ -34,7 +34,7 @@ impl Bernoulli {
 
 impl fmt::Debug for Bernoulli {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        write!(f, "Bernoulli {{ p: {}, modes: TODO}}", self.p)
+        write!(f, "Bernoulli {{ p: {}, modes: {:?}}}", self.p, self.modes)
     }
 }
 
