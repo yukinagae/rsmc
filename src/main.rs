@@ -16,7 +16,7 @@ fn main() {
     model.var("alpha", &uniform);
     model.var("beta", &bernoulli);
 
-    for (name, value) in model.vars.iter() {
+    for (name, value) in model.named_vars.iter() {
         println!("name: {:?}, random: {:?}", name, value.random());
     }
 }
