@@ -1,4 +1,3 @@
-extern crate probability;
 extern crate rsmc;
 
 use rsmc::distribution::uniform::Uniform;
