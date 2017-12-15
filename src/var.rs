@@ -7,3 +7,7 @@ pub enum Variable {
     Deterministic,
     Potential,
 }
+
+pub struct FreeRV {
+    total_size: usize,
+}
