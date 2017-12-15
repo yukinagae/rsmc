@@ -1,6 +1,10 @@
 pub mod bernoulli;
 pub mod uniform;
 
+use std::fmt;
+
+//use var::Stochastic;
+
 ///
 ///
 ///
@@ -9,10 +13,14 @@ pub trait Distribution {
     fn logp(&self) -> f64;
 }
 
-pub trait Discrete: Distribution {
-    fn mass(&self, x: f64) -> f64;
+impl fmt::Debug for Distribution {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "TODO Distribution Debug should be implemented")
+    }
 }
 
-pub trait Continuous: Distribution {
-    fn density(&self, x: f64) -> f64;
+#[derive(Debug, Clone, Copy)]
+pub enum DistType {
+    Discrete,
+    Continuous,
 }
