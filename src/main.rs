@@ -15,6 +15,8 @@ fn main() {
     let uniform = Uniform::new(1.0, 3.0);
     let bernoulli = Bernoulli::new(0.6);
 
+    let model2 = Model::new();
+
     let mut model = Model::new();
 
     model.var("alpha", &uniform);
@@ -28,5 +30,11 @@ fn main() {
     println!("# in free_rvs");
     for dist in model.free_rvs.values.iter() {
         println!("random: {:?}", dist.random());
+    }
+
+    model.set_parent(&model2);
+
+    if model.parent.is_some() {
+        println!("true");
     }
 }

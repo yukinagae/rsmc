@@ -1,6 +1,7 @@
 use std::rc::Rc;
 use std::collections::HashMap;
 
+#[derive(Debug)]
 pub struct TreeList<T> {
     pub parent: Option<Rc<TreeList<T>>>,
     pub values: Vec<T>,
@@ -19,6 +20,7 @@ impl<T> TreeList<T> {
     }
 }
 
+#[derive(Debug)]
 pub struct TreeDict<T> {
     pub parent: Option<Rc<TreeDict<T>>>,
     pub values: HashMap<String, T>,
