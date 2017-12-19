@@ -6,7 +6,6 @@ use self::probability::source;
 use self::probability::distribution::Sample;
 use self::probability::distribution::Modes;
 
-use distribution::Distribution;
 use distribution::DistType;
 
 ///
@@ -30,21 +29,19 @@ impl Bernoulli {
             modes: dist.modes(),
         }
     }
+
+    pub fn random(&self) -> f64 {
+        let mut source = source::default();
+        self.dist.sample(&mut source) as f64
+    }
+
+    pub fn logp(&self) -> f64 {
+        self.p.ln() // TODO: maybe wrong
+    }
 }
 
 impl fmt::Debug for Bernoulli {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         write!(f, "Bernoulli {{ p: {}, modes: {:?}}}", self.p, self.modes)
-    }
-}
-
-impl Distribution for Bernoulli {
-    fn random(&self) -> f64 {
-        let mut source = source::default();
-        self.dist.sample(&mut source) as f64
-    }
-
-    fn logp(&self) -> f64 {
-        self.p.ln() // TODO: maybe wrong
     }
 }

@@ -7,7 +7,6 @@ use self::probability::distribution::Sample;
 use self::probability::distribution::Mean;
 use self::probability::distribution::Median;
 
-use distribution::Distribution;
 use distribution::DistType;
 
 ///
@@ -41,15 +40,13 @@ impl Uniform {
             median: dist.median(),
         }
     }
-}
 
-impl Distribution for Uniform {
-    fn random(&self) -> f64 {
+    pub fn random(&self) -> f64 {
         let mut source = source::default();
         self.dist.sample(&mut source)
     }
 
-    fn logp(&self) -> f64 {
+    pub fn logp(&self) -> f64 {
         (self.upper - self.lower).ln()
     }
 }

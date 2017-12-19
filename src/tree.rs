@@ -34,6 +34,13 @@ impl<T> TreeDict<T> {
         }
     }
 
+    pub fn new_with_parent(parent: TreeDict<T>) -> Self {
+        TreeDict {
+            parent: Some(Rc::new(parent)),
+            values: HashMap::new(),
+        }
+    }
+
     pub fn insert(&mut self, key: String, value: T) {
         self.values.insert(key, value);
     }

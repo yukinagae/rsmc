@@ -1,42 +1,65 @@
+extern crate petgraph;
+
 use distribution::Distribution;
 
-use tree::{TreeDict, TreeList};
+use self::petgraph::Graph;
+
+//use tree::{TreeDict, TreeList};
 
 ///
 ///
 ///
-pub struct Model<'a> {
-    pub parent: Option<&'a Model<'a>>,
-    pub named_vars: TreeDict<&'a Distribution>, // all variables
-    pub deterministics: Vec<&'a Distribution>,  // TODO: deterministic variables
-    pub free_rvs: TreeList<&'a Distribution>,   // stochastic variables
-    pub observed_rvs: Vec<&'a Distribution>,    // stochastic + observed variables
+#[derive(Debug)]
+pub struct Model {
+    pub name: String,
+    pub parent: Option<String>,
+    pub named_vars: Vec<String>,     // all variables
+    pub deterministics: Vec<String>, // TODO: deterministic variables
+    pub free_rvs: Vec<String>,       // stochastic variables
+    pub observed_rvs: Vec<String>,   // stochastic + observed variables
+
+    pub graph: Graph<String, String>, // TODO: petgraph
 }
 
-///c
 ///
 ///
-impl<'a> Model<'a> {
-    pub fn new() -> Self {
+///
+impl Model {
+    pub fn new(name: String) -> Self {
         Model {
+            name: name,
             parent: None,
-            named_vars: TreeDict::new(),
+            named_vars: Vec::new(),
             deterministics: Vec::new(),
-            free_rvs: TreeList::new(),
+            free_rvs: Vec::new(),
             observed_rvs: Vec::new(),
+            graph: Graph::<String, String>::new(),
         }
     }
 
-    pub fn set_parent(&mut self, parent: &'a Model) {
-        self.parent = Option::Some(parent);
+    pub fn new_with_parent(name: String, parent: String) -> Self {
+        Model {
+            name: name,
+            parent: Some(parent),
+            named_vars: Vec::new(),
+            deterministics: Vec::new(),
+            free_rvs: Vec::new(),
+            observed_rvs: Vec::new(),
+            graph: Graph::<String, String>::new(),
+        }
+    }
+
+    pub fn with_parent(&mut self, parent: String) -> &mut Self {
+        self.parent = Some(parent);
+        self
     }
 
     // function `var` naming comes from pymc3 model
     // see: https://github.com/pymc-devs/pymc3/blob/391f5fd143b5a963daa869508adf1eaa051c346e/pymc3/model.py#L729
     pub fn var_with_options(
         &mut self,
-        name: &'a str,
-        dist: &'a Distribution,
+        name: String,
+        dist: &Distribution,
         data: Option<String>,
         total_size: Option<usize>,
     ) {
@@ -48,13 +71,17 @@ impl<'a> Model<'a> {
             println!("total_size is None");
         }
 
-        self.named_vars.insert(name.to_string(), dist);
-        self.free_rvs.push(dist);
+        self.named_vars.push(name.to_string());
+        self.free_rvs.push(name.to_string());
+
+        self.graph.add_node(name.to_string());
     }
 
-    pub fn var(&mut self, name: &'a str, dist: &'a Distribution) {
+    pub fn var(&mut self, name: String, dist: &Distribution) {
         self.var_with_options(name, dist, None, None);
     }
 
-    // pub fn deterministic(&mut self, name: &'a str, var: Var) -> Var {}
+    pub fn deterministic(&mut self, name: String, var: String) {
+        //
+    }
 }
