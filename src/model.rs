@@ -1,15 +1,17 @@
 use distribution::Distribution;
 
+use tree::{TreeDict, TreeList};
+
 use std::collections::HashMap;
 
 ///
 ///
 ///
 pub struct Model<'a> {
-    pub named_vars: HashMap<&'a str, &'a Distribution>, // all variables
-    pub deterministics: Vec<&'a Distribution>,          // TODO: deterministic variables
-    pub free_rvs: Vec<&'a Distribution>,                // stochastic variables
-    pub observed_rvs: Vec<&'a Distribution>,            // stochastic + observed variables
+    pub named_vars: TreeDict<&'a Distribution>, // all variables
+    pub deterministics: Vec<&'a Distribution>,  // TODO: deterministic variables
+    pub free_rvs: TreeList<&'a Distribution>,   // stochastic variables
+    pub observed_rvs: Vec<&'a Distribution>,    // stochastic + observed variables
 }
 
 ///c
@@ -18,9 +20,9 @@ pub struct Model<'a> {
 impl<'a> Model<'a> {
     pub fn new() -> Self {
         Model {
-            named_vars: HashMap::new(),
+            named_vars: TreeDict::new(),
             deterministics: Vec::new(),
-            free_rvs: Vec::new(),
+            free_rvs: TreeList::new(),
             observed_rvs: Vec::new(),
         }
     }
@@ -42,7 +44,7 @@ impl<'a> Model<'a> {
             println!("total_size is None");
         }
 
-        self.named_vars.insert(name, dist);
+        self.named_vars.insert(name.to_string(), dist);
         self.free_rvs.push(dist);
     }
 

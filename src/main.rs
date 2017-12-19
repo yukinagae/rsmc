@@ -21,12 +21,12 @@ fn main() {
     model.var("beta", &bernoulli);
 
     println!("# in named_vars");
-    for (name, dist) in model.named_vars.iter() {
+    for (name, dist) in model.named_vars.values.iter() {
         println!("name: {}, random: {:?}", name, dist.random());
     }
 
     println!("# in free_rvs");
-    for dist in model.free_rvs.iter() {
+    for dist in model.free_rvs.values.iter() {
         println!("random: {:?}", dist.random());
     }
 }
