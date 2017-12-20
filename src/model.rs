@@ -89,4 +89,34 @@ impl Model {
     pub fn deterministic(&mut self, name: String, var: String) {
         unimplemented!();
     }
+
+    pub fn ndim(&self) -> usize {
+        self.free_rvs.len()
+    }
+
+    pub fn vars(&self) -> Vec<String> {
+        self.free_rvs.clone()
+    }
+
+    pub fn basic_rvs(&self) -> Vec<String> {
+        let mut basic_rvs = Vec::new();
+        basic_rvs.extend(self.free_rvs.iter().cloned());
+        basic_rvs.extend(self.observed_rvs.iter().cloned());
+        basic_rvs
+    }
+
+    pub fn unobserved_rvs(&self) -> Vec<String> {
+        let mut unobserved_rvs = Vec::new();
+        unobserved_rvs.extend(self.free_rvs.iter().cloned());
+        unobserved_rvs.extend(self.deterministics.iter().cloned());
+        unobserved_rvs
+    }
+
+    pub fn disc_vars(&self) -> Vec<String> {
+        unimplemented!();
+    }
+
+    pub fn cont_vars(&self) -> Vec<String> {
+        unimplemented!();
+    }
 }
