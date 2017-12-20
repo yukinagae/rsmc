@@ -21,4 +21,4 @@ TODO
 
 # License
 
-TODO
+MIT
