@@ -1,6 +1,8 @@
 # rsmc
 Probabilistic Programming library for Rust mimicking PyMC3
 
+[![Build][https://travis-ci.org/yukinagae/rsmc.svg?branch=master]][https://travis-ci.org/yukinagae/rsmc]
+
 # Features
 
 TODO
