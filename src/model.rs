@@ -1,3 +1,4 @@
+extern crate autograd as ag;
 extern crate petgraph;
 
 use distribution::Distribution;
@@ -78,7 +79,7 @@ impl Model {
 
         self.graph.add_node(name.to_string());
 
-        return Variable::FreeRV;
+        Variable::FreeRV(ag::placeholder(&[-1]))
     }
 
     pub fn var(&mut self, name: String, dist: &Distribution) -> Variable {

@@ -1,22 +1,39 @@
 extern crate autograd as ag;
 
-use std::ops::Add;
+use std::ops::{Add, Mul};
 
-#[derive(Debug)]
+//#[derive(Debug)]
 pub enum Variable {
-    FreeRV,
+    FreeRV(ag::Tensor),
     //TransformedRV,
     //MultiObservedRV,
-    //ObservedRV,
+    ObservedRV(ag::Tensor),
 }
 
 impl Add for Variable {
     type Output = Variable;
 
     fn add(self, other: Variable) -> Variable {
-        use self::Variable::FreeRV;
+        use self::Variable::{FreeRV, ObservedRV};
         match (self, other) {
-            (FreeRV, FreeRV) => FreeRV,
+            (FreeRV(t1), FreeRV(t2)) => FreeRV(t1 + t2),
+            (FreeRV(t1), ObservedRV(t2)) => FreeRV(t1 + t2),
+            (ObservedRV(t1), FreeRV(t2)) => FreeRV(t1 + t2),
+            (ObservedRV(t1), ObservedRV(t2)) => FreeRV(t1 + t2),
+        }
+    }
+}
+
+impl Mul for Variable {
+    type Output = Variable;
+
+    fn mul(self, other: Variable) -> Variable {
+        use self::Variable::{FreeRV, ObservedRV};
+        match (self, other) {
+            (FreeRV(t1), FreeRV(t2)) => FreeRV(t1 * t2),
+            (FreeRV(t1), ObservedRV(t2)) => FreeRV(t1 * t2),
+            (ObservedRV(t1), FreeRV(t2)) => FreeRV(t1 * t2),
+            (ObservedRV(t1), ObservedRV(t2)) => FreeRV(t1 * t2),
         }
     }
 }

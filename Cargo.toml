@@ -4,7 +4,9 @@ version = "0.1.0"
 authors = ["Yuki Nagae <yuki.nagae1130@gmail.com>"]
 
 [dependencies]
+rand = "0.3"
 probability = "0.15.9"
 petgraph = "0.4.10"
 autograd = "0.6.3"
 ndarray = "0.10.13"
+ndarray-rand = "0.6.1"
