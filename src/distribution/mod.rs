@@ -1,25 +1,16 @@
-extern crate probability;
-
 pub mod bernoulli;
 pub mod uniform;
 
 use distribution::bernoulli::Bernoulli;
 use distribution::uniform::Uniform;
-//use var::Stochastic;
 
-///
-///
-///
-// pub trait Distribution {
-//     fn random(&self) -> f64;
-//     fn logp(&self) -> f64;
-// }
-
+#[derive(Debug)]
 pub enum Distribution {
     Ber(Bernoulli),
     Uni(Uniform),
 }
 
+#[allow(unused_variables)]
 impl Distribution {
     fn random(&self) -> f64 {
         match *self {

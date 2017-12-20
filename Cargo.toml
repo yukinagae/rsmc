@@ -5,5 +5,6 @@ authors = ["Yuki Nagae <yuki.nagae1130@gmail.com>"]
 
 [dependencies]
 probability = "0.15.9"
-nalgebra = "0.13.0"
 petgraph = "0.4.10"
+autograd = "0.6.3"
+ndarray = "0.10.13"

@@ -1,22 +1,22 @@
+extern crate autograd as ag;
+
 use std::ops::Add;
 
+#[derive(Debug)]
 pub enum Variable {
-    Stochastic,
-    Deterministic,
-    Potential,
+    FreeRV,
+    //TransformedRV,
+    //MultiObservedRV,
+    //ObservedRV,
 }
 
 impl Add for Variable {
     type Output = Variable;
 
     fn add(self, other: Variable) -> Variable {
-        Variable::Deterministic
+        use self::Variable::FreeRV;
+        match (self, other) {
+            (FreeRV, FreeRV) => FreeRV,
+        }
     }
 }
-
-pub struct FreeRV {
-    total_size: usize,
-}
-
-#[derive(Debug)]
-pub struct Expression {}

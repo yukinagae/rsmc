@@ -1,6 +1,7 @@
 extern crate petgraph;
 
 use distribution::Distribution;
+use var::Variable;
 
 use self::petgraph::Graph;
 
@@ -24,6 +25,7 @@ pub struct Model {
 ///
 ///
 ///
+#[allow(unused_variables)]
 impl Model {
     pub fn new(name: String) -> Self {
         Model {
@@ -62,7 +64,7 @@ impl Model {
         dist: &Distribution,
         data: Option<String>,
         total_size: Option<usize>,
-    ) {
+    ) -> Variable {
         if data == None {
             println!("data is None");
         }
@@ -75,13 +77,15 @@ impl Model {
         self.free_rvs.push(name.to_string());
 
         self.graph.add_node(name.to_string());
+
+        return Variable::FreeRV;
     }
 
-    pub fn var(&mut self, name: String, dist: &Distribution) {
-        self.var_with_options(name, dist, None, None);
+    pub fn var(&mut self, name: String, dist: &Distribution) -> Variable {
+        self.var_with_options(name, dist, None, None)
     }
 
     pub fn deterministic(&mut self, name: String, var: String) {
-        //
+        unimplemented!();
     }
 }
