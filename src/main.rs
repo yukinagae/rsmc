@@ -12,6 +12,7 @@ use rsmc::distribution::Distribution::{HNor, Nor};
 use rsmc::distribution::normal::{HalfNormal, Normal};
 use rsmc::model::Model;
 use rsmc::var::Variable::ObservedRV;
+use rsmc::sampling::sample;
 
 ///
 /// TODO: example
@@ -68,5 +69,7 @@ fn main() {
 
     // TODO: ovserved random variables
 
-    println!("{:?}", model);
+    let trace = sample(&model);
+
+    println!("{:?}", trace);
 }
